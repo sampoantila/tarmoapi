@@ -1,14 +1,13 @@
-﻿'use strict';
-var debug = require('debug');
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+﻿import debug from 'debug';
+import express from 'express';
+import path from 'path';
+//var favicon = require('serve-favicon');
+import logger from 'morgan';
+import cookieParser from 'cookie-parser';
+import bodyParser from 'body-parser';
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
+import routes from './routes/index';
+import users from './routes/users';
 
 var server; 
 var app = express();
@@ -73,4 +72,4 @@ exports.close = function () {
     });
 }
 
-this.listen();
+exports.listen();

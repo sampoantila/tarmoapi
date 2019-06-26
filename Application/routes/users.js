@@ -1,5 +1,4 @@
-﻿'use strict';
-var express = require('express');
+﻿import express from 'express';
 var router = express.Router();
 
 /* GET users listing. */
