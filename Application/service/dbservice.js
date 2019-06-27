@@ -26,6 +26,7 @@ class DbService {
 
             console.dir(result.recordset);
 
+            sql.close();
             return result.recordset;
         } catch(err) {
             console.error("query failed: user - list. error:", err);
