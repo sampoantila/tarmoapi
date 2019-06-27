@@ -1,9 +1,12 @@
 ﻿import express from 'express';
+import dbservice from '../service/dbservice';
+
 var router = express.Router();
 
 /* GET users listing. */
-router.get('/', function (req, res) {
-    res.send('respond with a resource');
+router.get('/', async (req, res) => {
+    let result = await dbservice.list();
+    res.send(result);
 });
 
-module.exports = router;
+export default router;
