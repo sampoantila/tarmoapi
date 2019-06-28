@@ -6,6 +6,7 @@
         "password": "xxxx"
     },
     "common": {
-        "appname": "TarmoAPI"
+        "appname": "TarmoAPI",
+        "passwordSaltRounds": 10
     }
 }

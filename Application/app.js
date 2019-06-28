@@ -9,9 +9,10 @@ import bodyParser from 'body-parser';
 import routes from './routes/index';
 import users from './routes/users';
 import groups from './routes/groups';
+import authenticate from './routes/authenticate';
 
 var server; 
-var app = express();
+const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -28,10 +29,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/api/v1/users', users);
 app.use('/api/v1/groups', groups);
+app.use('/api/v1/authenticate', authenticate);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
-    var err = new Error('Not Found');
+    const err = new Error('Not Found');
     err.status = 404;
     next(err);
 });
@@ -62,16 +64,18 @@ app.use((err, req, res, next) => {
 
 app.set('port', process.env.PORT || 3000);
 
-var listen = () => {
+const listen = () => {
     server = app.listen(app.get('port'), () => {
         debug('Express server listening on port ' + server.address().port);
     });
 }
 
-var close = () => {
+const close = () => {
     server.close(() => {
         debug('Server stopped.');
     });
 }
+
+export { listen, close };
 
 listen();

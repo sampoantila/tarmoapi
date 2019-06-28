@@ -1,7 +1,7 @@
 ﻿import express from 'express';
 import userController from '../controller/userController';
 
-var router = express.Router();
+const router = express.Router();
 
 router.route('/')
     .get(userController.list)
@@ -15,5 +15,9 @@ router.route('/:userId')
 router.route('/:userId/picture')
     .get(userController.getPicture)
     .put(userController.storePicture);
+
+router.route('/:userId/login')
+    .get(userController.getLogin)
+    .post(userController.createLogin);
 
 export default router;

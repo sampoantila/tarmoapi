@@ -1,7 +1,7 @@
 ﻿import express from 'express';
 import groupController from '../controller/groupController';
 
-var router = express.Router();
+const router = express.Router();
 
 router.route('/')
     .get(groupController.list)

@@ -4,23 +4,24 @@ import HttpStatus from 'http-status-codes';
 class GroupController {
 
     async list(req, res) {
-        let sql = await dbservice.connect();
-        let result = await sql.query`SELECT * FROM [group]`;
-        dbservice.close();
+        const sql = await dbservice.connect();
+        const result = await sql.query`
+            SELECT *
+            FROM [group]
+            `;
+        await dbservice.close();
         res.json(result.recordset);
     }
 
     async create(req, res) {
-        var sql = await dbservice.connect();
-
-        var result = await sql.query`
-        INSERT INTO [dbo].[group]
-           ([name])
-         VALUES
-           (${req.body.name})
-        `;
-
-        dbservice.close();
+        const sql = await dbservice.connect();
+        const result = await sql.query`
+            INSERT INTO [group]
+                ([name])
+            VALUES
+                (${req.body.name})
+            `;
+        await dbservice.close();
 
         if (result.rowsAffected[0] == 0) {
             res.sendStatus(HttpStatus.BAD_REQUEST);
@@ -30,9 +31,13 @@ class GroupController {
     }
 
     async get(req, res) {
-        var sql = await dbservice.connect();
-        var result = await sql.query`SELECT * FROM [group] WHERE id = ${req.params.groupId}`;
-        dbservice.close();
+        const sql = await dbservice.connect();
+        const result = await sql.query`
+            SELECT *
+            FROM [group]
+            WHERE id = ${req.params.groupId}
+            `;
+        await dbservice.close();
 
         if (result.recordset.length == 0) {
             res.sendStatus(HttpStatus.NOT_FOUND);
@@ -42,33 +47,44 @@ class GroupController {
     }
 
     async update(req, res) {
-        var sql = await dbservice.connect();
-        var result = await sql.query`SELECT * FROM [group] WHERE id = ${req.params.groupId}`;
+        const sql = await dbservice.connect();
+        const result = await sql.query`
+            SELECT *
+            FROM [group]
+            WHERE id = ${req.params.groupId}
+            `;
 
         if (result.recordset.length == 0) {
-            dbservice.close();
+            await dbservice.close();
             res.sendStatus(HttpStatus.NOT_FOUND);
         } else {
-            let group = result.recordset[0];
+            const group = result.recordset[0];
 
             group.name = req.body.name !== undefined ? req.body.name : group.name;
 
-            var result = await sql.query`
-                UPDATE [dbo].[group]
+            const updateResult = await sql.query`
+                UPDATE [group]
                 SET [name] = ${group.name}
                 WHERE id = ${req.params.groupId}
                 `;
+            await dbservice.close();
 
-            dbservice.close();
-
-            res.sendStatus(HttpStatus.OK);
+            if (updateResult.rowsAffected[0] == 1) {
+                res.sendStatus(HttpStatus.OK);
+            }
+            else {
+                res.sendStatus(HttpStatus.BAD_REQUEST);
+            }
         }
     }
 
     async delete(req, res) {
-        var sql = await dbservice.connect();
-        var result = await sql.query`DELETE FROM [group] WHERE id = ${req.params.groupId}`;
-        dbservice.close();
+        const sql = await dbservice.connect();
+        const result = await sql.query`
+            DELETE FROM [group]
+            WHERE id = ${req.params.groupId}
+            `;
+        await dbservice.close();
         
         if (result.rowsAffected[0] == 0) {
             res.sendStatus(HttpStatus.NOT_FOUND);

@@ -4,7 +4,7 @@ import config from '../config';
 class DbService {
     async connect() {
         // Create connection to database
-        var cfg = 
+        const cfg = 
         {
             server: config.database.hostname,
             database: config.database.name,
@@ -21,9 +21,9 @@ class DbService {
 
     async query(queryStr) {
         try {
-            sql.close();
-            let connection = await this.connect();
-            let result = await connection.query(queryStr);
+            await sql.close();
+            const connection = await this.connect();
+            const result = await connection.query(queryStr);
 
             return result;
         } catch(err) {
