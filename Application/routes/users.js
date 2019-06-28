@@ -1,13 +1,19 @@
 ﻿import express from 'express';
-import dbservice from '../service/dbservice';
+import userController from '../controller/userController';
 
 var router = express.Router();
 
-/* GET users listing. */
-router.get('/', async (req, res) => {
-    let result = await dbservice.list();
-    //res.send(result);
-    res.json(result);
-});
+router.route('/')
+    .get(userController.list)
+    .post(userController.create);
+
+router.route('/:userId')
+    .get(userController.get)
+    .put(userController.update)
+    .delete(userController.delete);
+
+router.route('/:userId/picture')
+    .get(userController.getPicture)
+    .put(userController.storePicture);
 
 export default router;

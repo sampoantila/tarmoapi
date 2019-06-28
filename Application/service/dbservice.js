@@ -19,18 +19,20 @@ class DbService {
         return await sql.connect(cfg);
     }
 
-    async list() {
+    async query(queryStr) {
         try {
-            let connection = await this.connect();
-            let result = await connection.request().query('SELECT * FROM [user]');
-
-            console.dir(result.recordset);
-
             sql.close();
-            return result.recordset;
+            let connection = await this.connect();
+            let result = await connection.query(queryStr);
+
+            return result;
         } catch(err) {
-            console.error("query failed: user - list. error:", err);
+            console.error(`query '${queryStr}' failed for error: '${err}'`);
         }
+    }
+
+    async close() {
+        await sql.close();
     }
 }
 
