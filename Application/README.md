@@ -3,7 +3,7 @@
 | Nodejs | Express | Azure Web App, Virtual Machine| |
 
 
-# Nodejs Express web application
+# TarmoAPI REST API
 
 TarmoAPI
 
