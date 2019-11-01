@@ -6,15 +6,15 @@
     "name": "shrer"
   },
   "dependencies": {
-    "@babel/core": "^7.4.5",
-    "@babel/preset-env": "^7.4.5",
-    "@babel/register": "^7.4.4",
-    "core-js": "^3.1.4",
+    "@babel/core": "^7.6.4",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/register": "^7.6.2",
+    "core-js": "^3.3.6",
     "gulp": "^4.0.2",
     "mocha": "^5.2.0",
-    "mocha-junit-reporter": "^1.18.0",
+    "mocha-junit-reporter": "^1.23.1",
     "natives": "^1.1.6",
-    "selenium-webdriver": "^4.0.0-alpha.1"
+    "selenium-webdriver": "^4.0.0-alpha.5"
   },
   "scripts": {
     "test": "node node_modules/mocha/bin/mocha --require @babel/register --compilers js:@babel/register --reporter mocha-junit-reporter --reporter-options mochaFile=../TestResults/TEST-RESULT.xml --recursive ./unit_tests/ --recursive ./functional_tests/"
